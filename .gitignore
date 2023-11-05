@@ -1,0 +1,48 @@
+# Node.js
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Yarn
+.yarn/*
+!.yarn/patches
+!.yarn/releases
+!.yarn/plugins
+!.yarn/sdks
+!.pnp.*
+
+# Editor directories
+.idea/
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# Log files
+*.log
+
+# Dependency directories
+pnpify/
+yarn-offline-mirror/
+.pnp.js
+
+# Ignore the build output of each MFE
+/admin-dashboard/build/
+/user-dashboard/build/
+/shell-frontend/build/
+
+# Ignore environment files (if applicable)
+/admin-dashboard/.env
+/user-dashboard/.env
+/shell-frontend/.env
+
+# Ignore Yarn workspace files
+/admin-dashboard/node_modules/
+/user-dashboard/node_modules/
+/shell-frontend/node_modules/
+
+# Ignore local development configuration
+/admin-dashboard/config/local.js
+/user-dashboard/config/local.js
+/shell-frontend/config/local.js

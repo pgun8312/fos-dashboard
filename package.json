@@ -1,0 +1,17 @@
+{
+  "name": "fos-dashboard",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "pkg:install": "concurrently \"cd admin-dashboard && yarn\" \"cd user-dashboard && yarn\" \"cd shell-frontend && yarn\"",
+    "dev": "concurrently \"cd admin-dashboard && yarn start:live\" \"cd user-dashboard && yarn start:live\" \"cd shell-frontend && yarn start:live\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "concurrently": "^8.2.2"
+  }
+}

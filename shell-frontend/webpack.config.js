@@ -45,13 +45,15 @@ module.exports = (_, argv) => ({
       filename: "remoteEntry.js",
       remotes: {
         user_dashboard: "user_dashboard@http://localhost:3002/remoteEntry.js",
-        admin_dashboard: "admin_dashboard@http://localhost:3001/remoteEntry.js"
+        admin_dashboard: "admin_dashboard@http://localhost:3001/remoteEntry.js",
+        shell_frontend: "shell_frontend@http://localhost:3000/remoteEntry.js"
       },
       exposes: {
-        "./MainLayout": "./src/MainLayout.jsx",
-        "./ProtectedRoute": "./src/components/layout/ProtectedRoute.jsx",
-        "./RootLayout": "./src/components/layout/RootLayout.jsx"
-        
+        "./MainLayout": "./src/MainLayout.jsx", /* to expose the the redux store and the routing */
+        "./ProtectedRoute": "./src/components/layout/ProtectedRoute.jsx", /* Route Protection */
+        "./RootLayout": "./src/components/layout/RootLayout.jsx", /* to expost the theming and root level store values */
+        "./DashboardLayout": "./src/components/layout/DashboardLayout.jsx", /* Dashbaord layout */
+        "./store": "./src/store/store.js"
       },
       shared: {
         ...deps,

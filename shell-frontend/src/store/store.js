@@ -1,12 +1,14 @@
 import {configureStore} from "@reduxjs/toolkit"
+import { Provider } from "react-redux";
 import theme from "./slices/themeSlice"
 import authUser from "./slices/authUserSlice"
-import { Provider } from "react-redux";
+import cart from "./slices/cartSlice"
 //redux store
 const store = configureStore({
     reducer:{
         theme,
-        authUser
+        authUser,
+        cart
     }
 })
 

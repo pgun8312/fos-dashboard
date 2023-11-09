@@ -22,7 +22,7 @@ const MainLayout = () => {
 
                     <Route element={<DashboardLayout />}>
                         
-                        {/* Admin and User Routes */}
+                        {/* User Only Routes */}
                         <Route element={<ProtectedRoute userRole={["User"]} redirect={"/"} />}>
                             <Route path="/user" element={<UserDashboard />} />
                         </Route>

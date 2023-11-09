@@ -1,8 +1,11 @@
+import Carousel from "shell_frontend/Carousel";
 
 const UserDashboard = () => {
   return (
-    <div>UserDashboard</div>
-  )
-}
+    <div>
+      <Carousel />
+    </div>
+  );
+};
 
-export default UserDashboard
+export default UserDashboard;

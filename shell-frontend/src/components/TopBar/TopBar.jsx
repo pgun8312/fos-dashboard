@@ -5,7 +5,8 @@ import {
     Menu as MenuIcon,
     Search,
     SettingsOutlined,
-    ArrowDropDownCircleOutlined
+    ArrowDropDownCircleOutlined,
+    ShoppingCartOutlined
 } from "@mui/icons-material"
 import {
     AppBar,
@@ -17,14 +18,17 @@ import {
     Toolbar,
     Menu,
     MenuItem,
-    useTheme
+    useTheme,
+    Badge
 } from "@mui/material"
-import {useDispatch} from "react-redux"
+import {useDispatch, useSelector} from "react-redux"
 import {setMode} from "../../store/slices/themeSlice"
+import {setIsCartOpen} from "../../store/slices/cartSlice";
 
 const TopBar = ({isSidebarOpen,setIsSideBarOpen}) => {
     const theme = useTheme();
     const dispatch = useDispatch();
+    const cart = useSelector((state) => state.cart.cart);
 
   return (
     <AppBar sx={{
@@ -66,6 +70,17 @@ const TopBar = ({isSidebarOpen,setIsSideBarOpen}) => {
                         theme.palette.mode === "dark" ? <DarkModeOutlined /> : <LightModeOutlined />
                     }
                 </IconButton>
+                <Badge
+                    badgeContent={cart.length}
+                    color='error'
+                    invisible={cart.length === 0}
+                >
+                    <IconButton onClick={() => {
+                        dispatch(setIsCartOpen());
+                    }}>
+                        <ShoppingCartOutlined />
+                    </IconButton>
+                </Badge>
                 <IconButton>
                     <SettingsOutlined />
                 </IconButton>

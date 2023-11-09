@@ -36,6 +36,14 @@ module.exports = (_, argv) => ({
           loader: "babel-loader",
         },
       },
+      {
+        test: /\.(png|jpe?g|gif)$/i,
+        use: [
+          {
+            loader: "file-loader",
+          },
+        ],
+      },
     ],
   },
 
@@ -46,14 +54,19 @@ module.exports = (_, argv) => ({
       remotes: {
         user_dashboard: "user_dashboard@http://localhost:3002/remoteEntry.js",
         admin_dashboard: "admin_dashboard@http://localhost:3001/remoteEntry.js",
-        shell_frontend: "shell_frontend@http://localhost:3000/remoteEntry.js"
+        shell_frontend: "shell_frontend@http://localhost:3000/remoteEntry.js",
       },
       exposes: {
-        "./MainLayout": "./src/MainLayout.jsx", /* to expose the the redux store and the routing */
-        "./ProtectedRoute": "./src/components/layout/ProtectedRoute.jsx", /* Route Protection */
-        "./RootLayout": "./src/components/layout/RootLayout.jsx", /* to expost the theming and root level store values */
-        "./DashboardLayout": "./src/components/layout/DashboardLayout.jsx", /* Dashbaord layout */
-        "./store": "./src/store/store.js"
+        "./MainLayout":
+          "./src/MainLayout.jsx" /* to expose the the redux store and the routing */,
+        "./ProtectedRoute":
+          "./src/components/layout/ProtectedRoute.jsx" /* Route Protection */,
+        "./RootLayout":
+          "./src/components/layout/RootLayout.jsx" /* to expost the theming and root level store values */,
+        "./DashboardLayout":
+          "./src/components/layout/DashboardLayout.jsx" /* Dashbaord layout */,
+        "./store": "./src/store/store.js",
+        "./Carousel": "./src/components/Carousel/Carousel.jsx",
       },
       shared: {
         ...deps,

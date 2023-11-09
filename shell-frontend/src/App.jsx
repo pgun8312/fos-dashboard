@@ -25,7 +25,7 @@ import "./index.css";
 // );
 
 import MainLayout from "./MainLayout";
-import { StoreProvider } from "shell_frontend/store/store";
+import { StoreProvider } from "shell_frontend/store";
 const root = createRoot(document.querySelector("#app"));
 root.render(
     //providing store values to this shell application

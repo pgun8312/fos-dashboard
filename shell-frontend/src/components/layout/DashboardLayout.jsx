@@ -3,9 +3,10 @@ import React, { useState } from 'react'
 import { Outlet } from 'react-router-dom'
 import SideBar from "../SideBar/SideBar"
 import TopBar from '../TopBar/TopBar'
+import Cart from '../Cart/Cart'
 
 const DashboardLayout = () => {
-  const isMobile = useMediaQuery("(max-width: 600px");
+  const isMobile = useMediaQuery("(max-width: 600px)");
   const [isSidebarOpen, setIsSideBarOpen] = useState(true);
 
   return (
@@ -30,7 +31,7 @@ const DashboardLayout = () => {
         />
         <Outlet />
       </Box>
-
+      <Cart isMobile={isMobile}/>
     </Box>
   )
 }

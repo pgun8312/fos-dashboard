@@ -1,16 +1,16 @@
 import { Box, Paper } from "@mui/material";
-import Login from "../components/Login/Login";
-// import loginImage from "https://images.unsplash.com/photo-1551963831-b3b1ca40c98e";
+import { Outlet } from "react-router-dom";
 
-const SignIn = () => {
+const AuthLayout = () => {
   return (
     <Box
       sx={{
-        width: "100%",
-        height: "100%",
+        // width: "100%",
+        height: "100vh",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
+        overflow: "hidden",
       }}
     >
       <Paper
@@ -29,6 +29,7 @@ const SignIn = () => {
           sx={{
             width: "50%",
             height: "90%",
+            // overflowY: "auto",
           }}
         >
           <img
@@ -41,10 +42,20 @@ const SignIn = () => {
             }}
           />
         </Box>
-        <Login />
+        <Box
+          sx={{
+            width: "40%",
+            height: "90%",
+            display: "flex",
+            flexDirection: "column",
+            overflowY: "auto",
+          }}
+        >
+          <Outlet />
+        </Box>
       </Paper>
     </Box>
   );
 };
 
-export default SignIn;
+export default AuthLayout;

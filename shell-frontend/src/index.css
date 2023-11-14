@@ -2,9 +2,18 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-.container {
+/* .container {
   font-size: 3rem;
   margin: auto;
   max-width: 800px;
   margin-top: 20px;
+} */
+
+html,
+body,
+#root,
+.app,
+.content {
+  height: 100%;
+  width: 100%;
 }

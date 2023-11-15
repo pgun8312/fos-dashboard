@@ -47,7 +47,6 @@ module.exports = (_, argv) => ({
         shell_frontend: "shell_frontend@http://localhost:3000/remoteEntry.js",
       },
       exposes: {
-        "./UserDashboard": "./src/UserDashboard.jsx",
         "./UserRoutes": "./src/UserRoutes.jsx",
       },
       shared: {

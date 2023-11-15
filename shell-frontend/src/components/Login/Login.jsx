@@ -73,7 +73,7 @@ const Login = () => {
       setUserName("");
       setPassword("");
       setError("");
-      navigate(user.role === "Admin" ? "/admin" : "/user");
+      navigate(user.role === "Admin" ? "/admin" : "/home");
     } catch (error) {
       // console.log(error);
       setError(error.data.error);

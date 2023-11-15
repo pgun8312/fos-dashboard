@@ -1,13 +1,7 @@
-import { useTheme } from "@emotion/react";
 import {
-  Anchor,
   ChevronLeft,
   ChevronRightOutlined,
-  HomeOutlined,
-  LocalMallOutlined,
   LogoutOutlined,
-  ManageAccountsOutlined,
-  ShoppingBagOutlined,
 } from "@mui/icons-material";
 import {
   Box,
@@ -22,114 +16,20 @@ import {
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { setAuthUser, setToken } from "../../store/slices/authUserSlice";
-
-const userNavItems = [
-  {
-    text: "Dashboard",
-    path: "/user",
-    icon: <HomeOutlined />,
-  },
-  {
-    text: "Products",
-    icon: null,
-  },
-  {
-    text: "Explore Products",
-    path: "/user/products",
-    icon: <ShoppingBagOutlined />,
-  },
-  {
-    text: "Orders",
-    icon: null,
-  },
-  {
-    text: "My Orders",
-    path: "/user/orders",
-    icon: <LocalMallOutlined />,
-  },
-];
-
-const GuestNavItems = [
-  {
-    text: "Dashboard",
-    path: "/home",
-    icon: <HomeOutlined />,
-  },
-  {
-    text: "Products",
-    icon: null,
-  },
-  {
-    text: "Explore Products",
-    path: "/user/products",
-    icon: <ShoppingBagOutlined />,
-  },
-  {
-    text: "Orders",
-    icon: null,
-  },
-  {
-    text: "My Orders",
-    path: "/auth/signup",
-    icon: <LocalMallOutlined />,
-  },
-];
-
-const adminNavItems = [
-  {
-    text: "Dashboard",
-    path: "/admin",
-    icon: <HomeOutlined />,
-  },
-  {
-    text: "Products",
-    icon: null,
-  },
-  {
-    text: "All Products",
-    path: "/admin/products",
-    icon: <ShoppingBagOutlined />,
-  },
-  {
-    text: "Orders",
-    icon: null,
-  },
-  {
-    text: "All Orders",
-    path: "/admin/orders",
-    icon: <LocalMallOutlined />,
-  },
-  {
-    text: "Users",
-    icon: null,
-  },
-  {
-    text: "Users Management",
-    path: "/admin/users",
-    icon: <ManageAccountsOutlined />,
-  },
-];
 
 const SideBar = ({
   isSidebarOpen,
   drawerWidth,
   setIsSideBarOpen,
   isMobile,
+  navItems,
 }) => {
   const [activeTab, setActiveTab] = useState("");
   const { pathname } = useLocation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const authUser = useSelector((state) => state.authUser.authUser);
-  const navItems =
-    authUser.role === "User"
-      ? userNavItems
-      : authUser.role === "Admin"
-      ? adminNavItems
-      : GuestNavItems;
-
   useEffect(() => {
     console.log(pathname);
     setActiveTab(pathname);

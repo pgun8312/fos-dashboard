@@ -42,13 +42,12 @@ module.exports = (_, argv) => ({
   plugins: [
     new ModuleFederationPlugin({
       name: "admin_dashboard", //name of the mfe
-      filename: "remoteEntry.js", //name of a file which will be imported in other mfe 
+      filename: "remoteEntry.js", //name of a file which will be imported in other mfe
       remotes: {
         shell_frontend: "shell_frontend@http://localhost:3000/remoteEntry.js",
-      }, 
+      },
       exposes: {
-        './AdminDashboard': './src/AdminDashboard.jsx',
-        './AdminRoutes': './src/AdminRoutes.jsx'
+        "./AdminRoutes": "./src/AdminRoutes.jsx",
       }, //code to be exported and can be used in other mfe
       shared: {
         ...deps,

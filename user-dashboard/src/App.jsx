@@ -7,11 +7,7 @@ import { UserDashboardStoreProvider } from "./store/store";
 
 const root = createRoot(document.querySelector("#app"));
 root.render(
-  <StoreProvider>
-    {/* Provding the global store for sub mfe */}
-    <UserDashboardStoreProvider>
-      {/* Sub mfe store  */}
-      <MainLayout />
-    </UserDashboardStoreProvider>
-  </StoreProvider>
+  <UserDashboardStoreProvider>
+    <MainLayout />
+  </UserDashboardStoreProvider>
 );

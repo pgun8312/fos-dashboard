@@ -1,7 +1,7 @@
 import React, { Suspense } from "react";
 import { createRoot } from "react-dom/client";
 import ErrorBoundary from "./ErrorBoundary";
-import "./index.css"; 
+import "./index.css";
 
 // const UserDashboard = React.lazy(() => import('user_dashboard/UserDashboard'));
 // const AdminDashboard = React.lazy(() => import('admin_dashboard/AdminDashboard'));
@@ -28,8 +28,9 @@ import MainLayout from "./MainLayout";
 import { StoreProvider } from "shell_frontend/store";
 const root = createRoot(document.querySelector("#app"));
 root.render(
-    //providing store values to this shell application
-    <StoreProvider>
-        <MainLayout />
-    </StoreProvider>
-    );
+  <StoreProvider>
+    {/* NEED TO PROVIDE GLOBAL STORE TO EVERY MFE NOT THE LOCAL IMPORT */}
+    {/* giving access to global store details */}
+    <MainLayout />
+  </StoreProvider>
+);

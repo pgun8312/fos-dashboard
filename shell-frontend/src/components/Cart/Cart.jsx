@@ -23,8 +23,8 @@ import carrot from "../../assets/carrot.png";
 const Cart = ({ isMobile }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const cart = useSelector((state) => state.cart.cart);
-  const isCartOpen = useSelector((state) => state.cart.isCartOpen);
+  const cart = useSelector((state) => state.globalCart.cart);
+  const isCartOpen = useSelector((state) => state.globalCart.isCartOpen);
   const authUser = useSelector((state) => state.authUser.authUser);
 
   //calculating total price

@@ -28,7 +28,7 @@ import { setIsCartOpen } from "../../store/slices/cartSlice";
 const TopBar = ({ isSidebarOpen, setIsSideBarOpen, isCartShow }) => {
   const theme = useTheme();
   const dispatch = useDispatch();
-  const cart = useSelector((state) => state.cart.cart);
+  const cart = useSelector((state) => state.globalCart.cart);
 
   return (
     <AppBar

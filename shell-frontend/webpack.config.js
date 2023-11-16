@@ -66,7 +66,6 @@ module.exports = (_, argv) => ({
         "./DashboardLayout":
           "./src/components/layout/DashboardLayout.jsx" /* Dashbaord layout */,
         "./store": "./src/store/store.js",
-        "./Carousel": "./src/components/Carousel/Carousel.jsx",
       },
       shared: {
         ...deps,

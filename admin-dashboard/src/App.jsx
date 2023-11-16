@@ -4,11 +4,11 @@ import "./index.css";
 import MainLayout from "shell_frontend/MainLayout";
 import { StoreProvider } from "shell_frontend/store";
 import { AdminRoutes } from "./AdminRoutes";
+import { AdminDashboardStoreProvider } from "./store/store";
 
 const root = createRoot(document.querySelector("#app"));
 root.render(
-  <StoreProvider>
-    {/* Provding the same store for whole applicaiton */}
+  <AdminDashboardStoreProvider>
     <MainLayout />
-  </StoreProvider>
+  </AdminDashboardStoreProvider>
 );

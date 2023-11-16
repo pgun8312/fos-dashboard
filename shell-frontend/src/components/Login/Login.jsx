@@ -55,7 +55,20 @@ const Login = () => {
       const { idToken, accessToken, expiresIn, user } = response.data;
 
       //setting the authenticated user Details and the token
-      dispatch(setAuthUser(user));
+      dispatch(
+        setAuthUser({
+          id: user.id,
+          userSub: user.userSub,
+          userName: user.userName,
+          name: user.name,
+          phone: user.phone,
+          email: user.email,
+          status: user.status,
+          role: user.role,
+          createdDate: user.createdDate,
+          modifiedDate: user.modifiedDate,
+        })
+      );
       dispatch(setToken(accessToken));
 
       //store in the sessionStorage
@@ -63,8 +76,15 @@ const Login = () => {
         "authUser",
         JSON.stringify({
           id: user.id,
+          userSub: user.userSub,
           userName: user.userName,
+          name: user.name,
+          phone: user.phone,
+          email: user.email,
+          status: user.status,
           role: user.role,
+          createdDate: user.createdDate,
+          modifiedDate: user.modifiedDate,
         })
       );
       sessionStorage.setItem("token", accessToken);

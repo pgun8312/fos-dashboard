@@ -16,7 +16,7 @@ import {
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setAuthUser, setToken } from "../../store/slices/authUserSlice";
 
 const SideBar = ({
@@ -30,6 +30,7 @@ const SideBar = ({
   const { pathname } = useLocation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const authUser = useSelector((state) => state);
   useEffect(() => {
     console.log(pathname);
     setActiveTab(pathname);

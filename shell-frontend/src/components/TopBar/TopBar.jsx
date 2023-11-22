@@ -22,11 +22,13 @@ import {
   Badge,
 } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import { setMode } from "../../store/slices/themeSlice";
+// import { setMode } from "../../store/slices/themeSlice";
 import { setIsCartOpen } from "../../store/slices/cartSlice";
+import { useGlobalStore } from "../../store/store";
 
 const TopBar = ({ isSidebarOpen, setIsSideBarOpen, isCartShow }) => {
   const theme = useTheme();
+  const { setMode } = useGlobalStore();
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.globalCart.cart);
 
@@ -76,6 +78,7 @@ const TopBar = ({ isSidebarOpen, setIsSideBarOpen, isCartShow }) => {
           <IconButton
             onClick={() => {
               dispatch(setMode());
+              console.log("hi");
             }}
           >
             {theme.palette.mode === "dark" ? (

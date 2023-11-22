@@ -1,9 +1,21 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-export const productApi = createApi({
-  baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:4000/api/v1/" }),
-  reducerPath: "productApi",
-  tagTypes: ["Product"],
+export const userApi = createApi({
+  baseQuery: fetchBaseQuery({
+    baseUrl: "http://localhost:4000/api/v1/",
+    prepareHeaders: (headers, { getState }) => {
+      //Get the token from the session or authUser global state
+      const token =
+        sessionStorage.getItem("token") || getState().authUser?.token;
+
+      //if token exists, include it in the headers
+      if (token) {
+        headers.set("Authorization", `Bearer ${token}`);
+      }
+    },
+  }),
+  reducerPath: "userApi",
+  tagTypes: ["Product", "Orders", "Users"],
   endpoints: (builder) => ({
     getProducts: builder.query({
       query: () => "products" /* endpoint */,
@@ -15,6 +27,7 @@ export const productApi = createApi({
         { type: "Product", id: productId },
       ],
     }),
+    /* This endpoint should not be here do the refactoring */
     createProduct: builder.mutation({
       query: (newProduct) => ({
         url: "products",
@@ -42,6 +55,18 @@ export const productApi = createApi({
         { type: "Product", id: productId },
       ],
     }),
+    createOrder: builder.mutation({
+      query: (newOrder) => ({
+        url: `orders`,
+        method: "POST",
+        body: newOrder,
+      }),
+      invalidatesTags: [{ type: "Users", id: "List" }],
+    }),
+    getUserDetails: builder.query({
+      query: (userId) => `users/${userId}`,
+      providesTags: (result, error, userId) => [{ type: "User", id: userId }],
+    }),
   }),
 });
 
@@ -51,4 +76,6 @@ export const {
   useCreateProductMutation,
   useUpdateProductMutation,
   useDeleteProductMutation,
-} = productApi;
+  useCreateOrderMutation,
+  useGetUserDetailsQuery,
+} = userApi;

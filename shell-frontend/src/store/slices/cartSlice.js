@@ -13,7 +13,7 @@ const cartSlice = createSlice({
     // },
     addToCart: (state, action) => {
       if (!state.cart.find((item) => item.id === action.payload.item.id)) {
-        state.cart = [...state.cart, action.payload.item];
+        state.cart = [...state.cart, { ...action.payload.item, count: 1 }];
       }
     },
     removeFromCart: (state, action) => {
@@ -35,6 +35,9 @@ const cartSlice = createSlice({
         return item;
       });
     },
+    clearCart: (state) => {
+      state.cart = [];
+    },
     setIsCartOpen: (state) => {
       state.isCartOpen = !state.isCartOpen;
     },
@@ -48,6 +51,7 @@ export const {
   increaseCount,
   decreaseCount,
   setIsCartOpen,
+  clearCart,
 } = cartSlice.actions;
 
 export default cartSlice.reducer;

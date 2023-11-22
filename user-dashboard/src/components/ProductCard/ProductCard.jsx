@@ -20,6 +20,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useGlobalStore } from "shell_frontend/store";
+import { Link } from "react-router-dom";
 
 const ProductCard = ({ product }) => {
   const dispatch = useDispatch();
@@ -39,13 +40,15 @@ const ProductCard = ({ product }) => {
       }}
     >
       {console.log(productState)}
-      <CardMedia
-        sx={{
-          height: "140px",
-        }}
-        image={product.image}
-        title={product.name}
-      />
+      <Link to={`/home/products/${product.id}`}>
+        <CardMedia
+          sx={{
+            height: "140px",
+          }}
+          image={product.image}
+          title={product.name}
+        />
+      </Link>
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
           {product.name}

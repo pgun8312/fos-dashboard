@@ -10,7 +10,9 @@ import globalCart, {
   increaseCount,
   decreaseCount,
   setIsCartOpen,
+  clearCart,
 } from "./slices/cartSlice";
+import { setMode } from "./slices/themeSlice";
 import { useSelector, useDispatch } from "react-redux";
 //redux store
 const store = configureStore({
@@ -48,7 +50,9 @@ export const useGlobalStore = () => {
     increaseCount,
     decreaseCount,
     setIsCartOpen,
+    clearCart,
     setAuthUser,
     setToken,
+    setMode,
   };
 };

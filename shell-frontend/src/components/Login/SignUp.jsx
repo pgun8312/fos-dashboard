@@ -58,7 +58,6 @@ const SignUp = () => {
         name: `${firstName} ${lastName}`,
         phone: phoneNumber || "",
       });
-      // console.log(response);
       if (response?.error) {
         throw response.error;
       }
@@ -72,7 +71,6 @@ const SignUp = () => {
       setError("");
       // navigate("/auth/confirm-signup");
     } catch (error) {
-      // console.log(error);
       setError(error.data.error);
     }
   };
@@ -159,7 +157,7 @@ const SignUp = () => {
           </Box>
           <TextField
             label="Email"
-            type="text"
+            type="email"
             id="SignUp-email"
             required
             fullWidth

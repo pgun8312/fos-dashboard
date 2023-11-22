@@ -183,7 +183,7 @@ const Cart = ({ isMobile }) => {
             <Button
               onClick={() => {
                 navigate(
-                  authUser.role !== "Guest" ? "/user/checkout" : "/auth/signup"
+                  authUser.role !== "Guest" ? "/home/checkout" : "/auth/signup"
                 );
                 () => dispatch(setIsCartOpen());
               }}

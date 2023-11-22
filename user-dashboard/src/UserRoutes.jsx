@@ -14,6 +14,9 @@ import { UserDashboardStoreProvider } from "./store/store.js";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import { Box, CircularProgress } from "@mui/material";
+import ProductDetails from "./pages/ProductDetails.jsx";
+import Checkout from "./pages/Checkout.jsx";
+import UserProfile from "./pages/UserProfile.jsx";
 
 export const UserRoutes = () => {
   //based on the user role sidebar navigation icons will render
@@ -82,11 +85,14 @@ export const UserRoutes = () => {
               }
             >
               <Route path="/home/orders" element={<UserOrders />} />
+              <Route path="/home/checkout" element={<Checkout />} />
+              <Route path="/home/profile" element={<UserProfile />} />
             </Route>
             {/* COMMON ROUTES */}
             {/* User and Guest Dashboard , sub routes define by each mfe */}
             <Route path="/home" element={<UserDashboard />} />
             <Route path="/home/products" element={<UserProducts />} />
+            <Route path="/home/products/:id" element={<ProductDetails />} />
           </Route>
         </Route>
       </Route>

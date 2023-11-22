@@ -3,14 +3,17 @@ import ProductCard from "./components/ProductCard/ProductCard";
 import { Box, Grid, Tab, Tabs, Typography } from "@mui/material";
 import { useSelector } from "react-redux";
 import ice_cream from "./assets/ice_cream.jpg";
-import { useGetProductsQuery } from "./store/apis/productApi";
+import { useGetProductsQuery } from "./store/apis/userApi";
 import { useEffect, useState } from "react";
 import { MoonLoader } from "react-spinners";
 import { useDispatch } from "react-redux";
+import { setProducts } from "./store/slices/productSlice";
+import { useNavigate } from "react-router-dom";
 
 const UserDashboard = () => {
   const authUser = useSelector((state) => state.authUser.authUser);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   // useGetProductsQuery automatically caches the data, no need to check for !isSuccess
   const {
     data: products,
@@ -25,6 +28,7 @@ const UserDashboard = () => {
 
   useEffect(() => {
     if (isSuccess) {
+      dispatch(setProducts(products));
       const categories = [
         ...new Set(products.map((product) => product.category)),
       ];

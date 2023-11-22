@@ -22,7 +22,7 @@ import { selectProductById } from "../store/slices/productSlice";
 import { useGlobalStore } from "shell_frontend/store";
 import ice_cream from "../assets/ice_cream.jpg";
 import { useGetProductByIdQuery } from "../store/apis/userApi";
-import { MoonLoader } from "react-spinners";
+import { HashLoader, MoonLoader } from "react-spinners";
 import CustomMainButton from "../components/CustomMainButton/CustomMainButton";
 import { useTheme } from "@mui/material";
 
@@ -59,7 +59,7 @@ const ProductDetails = () => {
           height: "90vh",
         }}
       >
-        <MoonLoader loading={true} color="#36d7b7" speedMultiplier={2} />
+        <HashLoader loading={true} color="#36d7b7" speedMultiplier={2} />
       </Box>
     );
   }

@@ -1,4 +1,5 @@
 import {
+  AccountCircleOutlined,
   HomeOutlined,
   LocalMallOutlined,
   ShoppingBagOutlined,
@@ -27,6 +28,15 @@ const userNavItems = [
     text: "My Orders",
     path: "/home/orders",
     icon: <LocalMallOutlined />,
+  },
+  {
+    text: "Profile",
+    icon: null,
+  },
+  {
+    text: "My Profile",
+    path: "/home/profile",
+    icon: <AccountCircleOutlined />,
   },
 ];
 

@@ -15,17 +15,51 @@ export const userApi = createApi({
     },
   }),
   reducerPath: "userApi",
-  tagTypes: ["Product", "Orders", "Users"],
+  tagTypes: ["Products", "Orders", "Users"],
   endpoints: (builder) => ({
     getProducts: builder.query({
       query: () => "products" /* endpoint */,
-      providesTags: (result) => [{ type: "Product", id: "List" }],
+      providesTags: ["Products"],
     }),
     getProductById: builder.query({
       query: (productId) => `products/${productId}`,
-      providesTags: (result, error, productId) => [
-        { type: "Product", id: productId },
-      ],
+      providesTags: ["Products"],
+    }),
+    createOrder: builder.mutation({
+      query: (newOrder) => ({
+        url: `orders`,
+        method: "POST",
+        body: newOrder,
+      }),
+      invalidatesTags: ["Orders"],
+    }),
+    getUserDetails: builder.query({
+      query: (userId) => `users/${userId}`,
+      providesTags: ["Users"],
+    }),
+    updateUserAccountDetails: builder.mutation({
+      query: ({ updatedUser, userId }) => ({
+        url: `users/${userId}`,
+        method: "PUT",
+        body: updatedUser,
+      }),
+      invalidatesTags: ["Users"],
+    }),
+    creaeteUserProfileDetails: builder.mutation({
+      query: (newUserProfile) => ({
+        url: `users/user-profile`,
+        method: "POST",
+        body: newUserProfile,
+      }),
+      invalidatesTags: ["Users"],
+    }),
+    updateUserProfileDetails: builder.mutation({
+      query: ({ updatedUserProfile, userId }) => ({
+        url: `users/user-profile/${userId}`,
+        method: "PUT",
+        body: updatedUserProfile,
+      }),
+      invalidatesTags: ["Users"],
     }),
     /* This endpoint should not be here do the refactoring */
     createProduct: builder.mutation({
@@ -34,7 +68,7 @@ export const userApi = createApi({
         method: "POST",
         body: newProduct,
       }),
-      invalidatesTags: [{ type: "Product", id: "List" }],
+      invalidatesTags: ["Products"],
     }),
     updateProduct: builder.mutation({
       query: ({ productId, updatedProduct }) => ({
@@ -42,30 +76,14 @@ export const userApi = createApi({
         method: "PUT",
         body: updatedProduct,
       }),
-      invalidatesTags: (result, error, { productId }) => [
-        { type: "Product", id: productId },
-      ],
+      invalidatesTags: ["Products"],
     }),
     deleteProduct: builder.mutation({
       query: (productId) => ({
         url: `products/${productId}`,
         method: "DELETE",
       }),
-      invalidatesTags: (result, error, productId) => [
-        { type: "Product", id: productId },
-      ],
-    }),
-    createOrder: builder.mutation({
-      query: (newOrder) => ({
-        url: `orders`,
-        method: "POST",
-        body: newOrder,
-      }),
-      invalidatesTags: [{ type: "Users", id: "List" }],
-    }),
-    getUserDetails: builder.query({
-      query: (userId) => `users/${userId}`,
-      providesTags: (result, error, userId) => [{ type: "User", id: userId }],
+      invalidatesTags: ["Products"],
     }),
   }),
 });
@@ -78,4 +96,7 @@ export const {
   useDeleteProductMutation,
   useCreateOrderMutation,
   useGetUserDetailsQuery,
+  useUpdateUserAccountDetailsMutation,
+  useUpdateUserProfileDetailsMutation,
+  useCreaeteUserProfileDetailsMutation,
 } = userApi;

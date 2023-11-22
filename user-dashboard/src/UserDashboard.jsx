@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import ice_cream from "./assets/ice_cream.jpg";
 import { useGetProductsQuery } from "./store/apis/userApi";
 import { useEffect, useState } from "react";
-import { MoonLoader } from "react-spinners";
+import { HashLoader, MoonLoader } from "react-spinners";
 import { useDispatch } from "react-redux";
 import { setProducts } from "./store/slices/productSlice";
 import { useNavigate } from "react-router-dom";
@@ -50,7 +50,7 @@ const UserDashboard = () => {
           height: "90vh",
         }}
       >
-        <MoonLoader loading={true} color="#36d7b7" speedMultiplier={2} />
+        <HashLoader loading={true} color="#36d7b7" speedMultiplier={2} />
       </Box>
     );
   }

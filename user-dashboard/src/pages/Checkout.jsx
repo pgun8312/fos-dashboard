@@ -26,10 +26,11 @@ import {
 import { useSelector, useDispatch } from "react-redux";
 import carrot from "../assets/carrot.png";
 import {
+  useCreaeteUserProfileDetailsMutation,
   useCreateOrderMutation,
   useGetUserDetailsQuery,
 } from "../store/apis/userApi";
-import { MoonLoader } from "react-spinners";
+import { HashLoader, MoonLoader } from "react-spinners";
 import styled from "@emotion/styled";
 import { useNavigate } from "react-router-dom";
 import OrderDetailsModalContent from "../components/Modal/OrderDetailsModalContent";
@@ -57,40 +58,67 @@ const Checkout = () => {
   const [orderSuccessResponse, setOrderSuccessResponse] = useState({});
   // useCreateOrderMutation should be called at the top level of the component
   const [createOrder, { isLoading }] = useCreateOrderMutation();
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const requestBody = {
-      orderItems: cart.map((item) => {
-        return { productId: item.id, quantity: item.count };
-      }),
-      userId: id,
-    };
-
-    try {
-      const response = await createOrder(requestBody);
-      if (response?.error) {
-        throw response.error;
-      }
-      console.log(response);
-      setOrderSuccessResponse(response.data);
-      dispatch(clearCart());
-      setOpenModal(true);
-    } catch (error) {
-      alert(error?.data?.error || "Unable to place the order!");
-    }
-  };
+  const [createUserProfile, { isLoading: isUserProfileCreatingLoading }] =
+    useCreaeteUserProfileDetailsMutation();
 
   //STATE VARIABLES
   const [email, setEmail] = useState("");
   const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
+  const [isProfileInformationPreset, setIsProfileInformationPreset] =
+    useState(false);
   const [address, setAddress] = useState("");
   const [city, setCity] = useState("");
   const [postalCode, setPostalCode] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [isSnackBarOpen, setIsSnackBarOpen] = useState(false);
   const [isSaveInformation, setIsSaveInformation] = useState(false);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      if (!isProfileInformationPreset) {
+        const profileCreationRequestBody = {
+          deliveryAddress: address,
+          city,
+          postalCode,
+          profilePicture: null,
+          userId: id,
+        };
+
+        const userProfileCreatingResponse = await createUserProfile(
+          profileCreationRequestBody
+        );
+        if (userProfileCreatingResponse?.error) {
+          throw userProfileCreatingResponse.error;
+        }
+
+        setAddress(userProfileCreatingResponse?.data?.deliveryAddress || "");
+        setCity(userProfileCreatingResponse?.data?.city || "");
+        setPostalCode(userProfileCreatingResponse?.data?.postalCode || "");
+      }
+
+      const requestBody = {
+        orderItems: cart.map((item) => {
+          return { productId: item.id, quantity: item.count };
+        }),
+        userId: id,
+      };
+
+      const response = await createOrder(requestBody);
+      if (response?.error) {
+        throw response.error;
+      }
+      console.log(response);
+
+      setOrderSuccessResponse(response.data);
+      dispatch(clearCart());
+      setOpenModal(true);
+    } catch (error) {
+      console.log(error);
+      alert(error?.data?.error || "Unable to place the order!");
+    }
+  };
 
   const {
     data: userDetails,
@@ -105,6 +133,9 @@ const Checkout = () => {
   //get the user Details
   useEffect(() => {
     if (userDetails) {
+      if (userDetails?.deliveryAddress) {
+        setIsProfileInformationPreset(true);
+      }
       setEmail(userDetails?.email || "");
       setFirstName(userDetails?.name || "");
       setAddress(userDetails?.deliveryAddress || "");
@@ -132,7 +163,7 @@ const Checkout = () => {
           height: "90vh",
         }}
       >
-        <MoonLoader loading={true} color="#36d7b7" speedMultiplier={2} />
+        <HashLoader loading={true} color="#36d7b7" speedMultiplier={2} />
       </Box>
     );
   }
@@ -261,7 +292,7 @@ const Checkout = () => {
                   fullWidth
                   value={address}
                   onChange={(e) => setAddress(e.target.value)}
-                  disabled={address !== ""}
+                  disabled={isProfileInformationPreset}
                 />
                 <TextField
                   label="City"
@@ -272,7 +303,7 @@ const Checkout = () => {
                   size="small"
                   onChange={(e) => setCity(e.target.value)}
                   fullWidth
-                  disabled={city !== ""}
+                  disabled={isProfileInformationPreset}
                 />
                 <TextField
                   label="Postal Code"
@@ -283,7 +314,7 @@ const Checkout = () => {
                   size="small"
                   value={postalCode}
                   onChange={(e) => setPostalCode(e.target.value)}
-                  disabled={postalCode !== ""}
+                  disabled={isProfileInformationPreset}
                 />
                 <TextField
                   label="Phone number"
@@ -315,11 +346,14 @@ const Checkout = () => {
                 <FormControlLabel
                   control={
                     <Checkbox
+                      checked={!isProfileInformationPreset}
                       onChange={() => setIsSaveInformation(!isSaveInformation)}
                     />
                   }
                   label="Save this informations for next time"
-                  disabled={address !== "" ? true : false}
+                  disabled={
+                    isUserProfileCreatingLoading || isProfileInformationPreset
+                  }
                 />
                 <Button
                   variant="contained"
@@ -462,7 +496,13 @@ const Checkout = () => {
             display: "flex",
           }}
         >
-          <Button fullWidth onClick={() => setOpenModal(false)}>
+          <Button
+            fullWidth
+            onClick={() => {
+              setOpenModal(false);
+              navigate("/home/orders");
+            }}
+          >
             CLOSE
           </Button>
         </DialogActions>

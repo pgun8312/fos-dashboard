@@ -46,7 +46,7 @@ const UserDashboard = () => {
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
-          width: "90vw",
+          width: "80vw",
           height: "90vh",
         }}
       >

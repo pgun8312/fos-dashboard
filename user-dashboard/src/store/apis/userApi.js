@@ -33,6 +33,14 @@ export const userApi = createApi({
       }),
       invalidatesTags: ["Orders"],
     }),
+    getUserOrder: builder.query({
+      query: (userId) => `orders/user/${userId}`,
+      providesTags: ["Orders"],
+    }),
+    getOrderById: builder.query({
+      query: (orderId) => `orders/${orderId}`,
+      providesTags: ["Orders"],
+    }),
     getUserDetails: builder.query({
       query: (userId) => `users/${userId}`,
       providesTags: ["Users"],
@@ -91,6 +99,8 @@ export const userApi = createApi({
 export const {
   useGetProductsQuery,
   useGetProductByIdQuery,
+  useGetUserOrderQuery,
+  useGetOrderByIdQuery,
   useCreateProductMutation,
   useUpdateProductMutation,
   useDeleteProductMutation,

@@ -74,7 +74,7 @@ const ProductCard = ({ product }) => {
           bottom: openExtra ? 0 : "-100%",
           height: "50%",
           backgroundColor: "#fff",
-          transition: "bottom 1s ease",
+          transition: "bottom 0.5s ease",
         }}
       >
         <Box

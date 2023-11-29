@@ -350,7 +350,6 @@ const AdminOrders = () => {
           getRowId={(row) => row.id}
           checkboxSelection
           disableRowSelectionOnClick
-          sortModel={sortModel}
         />
       </Box>
     );

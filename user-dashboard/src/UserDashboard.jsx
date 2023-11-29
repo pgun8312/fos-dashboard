@@ -12,7 +12,7 @@ import { useNavigate } from "react-router-dom";
 import InternalServerError from "./pages/InternalServerError";
 
 const UserDashboard = () => {
-  const authUser = useSelector((state) => state.authUser.authUser);
+  const state = useSelector((state) => state);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   // useGetProductsQuery automatically caches the data, no need to check for !isSuccess
@@ -109,8 +109,7 @@ const UserDashboard = () => {
 
   return (
     <div>
-      {console.log(authUser)}
-      {console.log("UserDashboard: ", products)}
+      {console.log(state)}
       <Carousel />
 
       {content}

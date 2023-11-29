@@ -10,6 +10,8 @@ import AdminDashboard from "./AdminDashboard.jsx";
 import { adminNavItems } from "./components/navItems.js";
 import { useSelector, useDispatch } from "react-redux";
 import { AdminDashboardStoreProvider } from "./store/store.js";
+import AdminProductManagement from "./pages/AdminProductManagement.jsx";
+import NotFound from "./pages/NotFound.jsx";
 export const AdminRoutes = () => {
   const authUser = useSelector((state) => state.authUser.authUser);
   return (
@@ -28,12 +30,14 @@ export const AdminRoutes = () => {
                 <ProtectedRoute userRole={["Admin"]} redirect={"/home"} />
               }
             >
-              <Route path="/admin" element={<AdminDashboard />} />
-              <Route path="/admin/orders" element={<AdminOrders />} />
-              <Route path="/admin/products" element={<AdminProducts />} />
-              <Route path="/admin/users" element={<AdminUsers />} />
+              <Route path="/" element={<AdminDashboard />} />
+              <Route path="orders" element={<AdminOrders />} />
+              <Route path="products" element={<AdminProducts />} />
+              <Route path="products/:id" element={<AdminProductManagement />} />
+              <Route path="users" element={<AdminUsers />} />
             </Route>
           </Route>
+          <Route path="*" element={<NotFound />} />
         </Route>
       </Route>
     </Routes>

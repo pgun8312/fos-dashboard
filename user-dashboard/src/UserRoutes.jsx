@@ -17,6 +17,7 @@ import { Box, CircularProgress } from "@mui/material";
 import ProductDetails from "./pages/ProductDetails.jsx";
 import Checkout from "./pages/Checkout.jsx";
 import UserProfile from "./pages/UserProfile.jsx";
+import NotFound from "./pages/NotFound.jsx";
 
 export const UserRoutes = () => {
   //based on the user role sidebar navigation icons will render
@@ -78,21 +79,23 @@ export const UserRoutes = () => {
           <Route
             element={<DashboardLayout isCartShow={true} navItems={navItems} />}
           >
+            {/* COMMON ROUTES */}
+            {/* User and Guest Dashboard , sub routes define by each mfe */}
+            <Route path="/" element={<UserDashboard />} />
+            <Route path="products" element={<UserProducts />} />
+            <Route path="products/:id" element={<ProductDetails />} />
+            <Route path="/*" element={<NotFound />} />
+
             {/* User only Routes */}
             <Route
               element={
                 <ProtectedRoute userRole={["User"]} redirect={"/home"} />
               }
             >
-              <Route path="/home/orders" element={<UserOrders />} />
-              <Route path="/home/checkout" element={<Checkout />} />
-              <Route path="/home/profile" element={<UserProfile />} />
+              <Route path="orders" element={<UserOrders />} />
+              <Route path="checkout" element={<Checkout />} />
+              <Route path="profile" element={<UserProfile />} />
             </Route>
-            {/* COMMON ROUTES */}
-            {/* User and Guest Dashboard , sub routes define by each mfe */}
-            <Route path="/home" element={<UserDashboard />} />
-            <Route path="/home/products" element={<UserProducts />} />
-            <Route path="/home/products/:id" element={<ProductDetails />} />
           </Route>
         </Route>
       </Route>

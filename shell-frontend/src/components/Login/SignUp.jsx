@@ -21,6 +21,7 @@ import { useTheme } from "@emotion/react";
 import { useNavigate } from "react-router-dom";
 import { useSignUpMutation } from "../../store/apis/authApi";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
+import InternalServerError from "../../pages/InternalServerError";
 
 const CustomSecondaryButton = styled("button")(({ theme }) => ({
   border: "none",
@@ -43,7 +44,7 @@ const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
   const theme = useTheme();
   const navigate = useNavigate();
-  const [signup, { isLoading }] = useSignUpMutation();
+  const [signup, { isLoading, isError }] = useSignUpMutation();
 
   const [isSnackBarOpen, setIsSnackBarOpen] = useState(false);
 
@@ -71,11 +72,22 @@ const SignUp = () => {
       setError("");
       // navigate("/auth/confirm-signup");
     } catch (error) {
-      setError(error.data.error);
+      if (error?.data) {
+        // If there is an error response from the server
+        setError(error?.data?.error || "ERROR");
+      } else if (error?.code === "failed-precondition" || "ERROR") {
+        // Handle network error or server down
+        setError("Network error or server is down. Please try again later.");
+      } else {
+        // Handle other errors
+        setError("An unexpected error occurred. Please try again later.");
+      }
     }
   };
 
-  return (
+  let content;
+
+  content = (
     <form
       style={{
         width: "100%",
@@ -273,6 +285,12 @@ const SignUp = () => {
       </Card>
     </form>
   );
+
+  if (isError) {
+    content = <InternalServerError />;
+  }
+
+  return <>{content}</>;
 };
 
 export default SignUp;

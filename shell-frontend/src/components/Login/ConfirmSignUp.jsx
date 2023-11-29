@@ -21,6 +21,7 @@ import {
   useConfirmSignUpMutation,
   useResendConfirmationCodeMutation,
 } from "../../store/apis/authApi";
+import InternalServerError from "../../pages/InternalServerError";
 
 const CustomSecondaryButton = styled("button")(({ theme }) => ({
   border: "none",
@@ -60,7 +61,16 @@ const ConfirmSignUp = () => {
       // navigate("/auth/signin");
     } catch (error) {
       // console.log(error);
-      setError(error.data.error);
+      if (error?.data) {
+        // If there is an error response from the server
+        setError(error?.data?.error || "ERROR");
+      } else if (error?.code === "failed-precondition" || "ERROR") {
+        // Handle network error or server down
+        setError("Network error or server is down. Please try again later.");
+      } else {
+        // Handle other errors
+        setError("An unexpected error occurred. Please try again later.");
+      }
     }
   };
 
@@ -83,10 +93,23 @@ const ConfirmSignUp = () => {
       alert("Code successfully resend");
       setError("");
     } catch (error) {
-      setError(error.data.error);
+      // console.log(error);
+      if (error?.data) {
+        // If there is an error response from the server
+        setError(error?.data?.error || "ERROR");
+      } else if (error?.code === "failed-precondition" || "ERROR") {
+        // Handle network error or server down
+        setError("Network error or server is down. Please try again later.");
+      } else {
+        // Handle other errors
+        setError("An unexpected error occurred. Please try again later.");
+      }
     }
   };
-  return (
+
+  let content;
+
+  content = (
     <form
       style={{
         width: "100%",
@@ -254,6 +277,8 @@ const ConfirmSignUp = () => {
       </Card>
     </form>
   );
+
+  return <>{content}</>;
 };
 
 export default ConfirmSignUp;

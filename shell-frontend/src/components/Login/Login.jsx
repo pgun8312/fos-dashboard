@@ -21,6 +21,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useSignInMutation } from "../../store/apis/authApi";
 import { setAuthUser, setToken } from "../../store/slices/authUserSlice";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
+import InternalServerError from "../../pages/InternalServerError";
 
 const CustomSecondaryButton = styled("button")(({ theme }) => ({
   border: "none",
@@ -39,7 +40,7 @@ const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const theme = useTheme();
   const navigate = useNavigate();
-  const [signin, { isLoading }] = useSignInMutation();
+  const [signin, { isLoading, isError }] = useSignInMutation();
   const dispatch = useDispatch();
 
   //handle submit
@@ -96,11 +97,22 @@ const Login = () => {
       navigate(user.role === "Admin" ? "/admin" : "/home");
     } catch (error) {
       // console.log(error);
-      setError(error.data.error);
+      if (error?.data) {
+        // If there is an error response from the server
+        setError(error?.data?.error || "ERROR");
+      } else if (error?.code === "failed-precondition" || "ERROR") {
+        // Handle network error or server down
+        setError("Network error or server is down. Please try again later.");
+      } else {
+        // Handle other errors
+        setError("An unexpected error occurred. Please try again later.");
+      }
     }
   };
 
-  return (
+  let content;
+
+  content = (
     <form
       style={{
         width: "100%",
@@ -251,6 +263,12 @@ const Login = () => {
       </Card>
     </form>
   );
+
+  if (isError) {
+    content = <InternalServerError />;
+  }
+
+  return <>{content}</>;
 };
 
 export default Login;

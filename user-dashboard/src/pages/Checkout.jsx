@@ -35,6 +35,7 @@ import styled from "@emotion/styled";
 import { useNavigate } from "react-router-dom";
 import OrderDetailsModalContent from "../components/Modal/OrderDetailsModalContent";
 import { useGlobalStore } from "shell_frontend/store";
+import InternalServerError from "./InternalServerError";
 const CustomSecondaryButton = styled("button")(({ theme }) => ({
   border: "none",
   background: "none",
@@ -170,12 +171,7 @@ const Checkout = () => {
 
   if (isError) {
     // Handle error state
-    content = (
-      <Typography variant="h4" color="error">
-        Error loading user details. Please try again.
-        {console.log(error)}
-      </Typography>
-    );
+    content = <InternalServerError />;
   }
   if (isSuccess) {
     content = (

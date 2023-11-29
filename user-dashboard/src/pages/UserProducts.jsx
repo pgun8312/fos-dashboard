@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { HashLoader, MoonLoader } from "react-spinners";
 import { setProducts } from "../store/slices/productSlice";
 import { useNavigate } from "react-router-dom";
+import InternalServerError from "./InternalServerError";
 
 const UserProducts = () => {
   const dispatch = useDispatch();
@@ -53,7 +54,7 @@ const UserProducts = () => {
   }
 
   if (isError) {
-    content = <Box>Error: {error}</Box>;
+    content = <InternalServerError />;
     // Handle the error
   }
 

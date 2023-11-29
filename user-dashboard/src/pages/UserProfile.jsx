@@ -20,6 +20,7 @@ import {
 } from "../store/apis/userApi";
 import { useSelector } from "react-redux";
 import { HashLoader } from "react-spinners";
+import InternalServerError from "./InternalServerError";
 const UserProfile = () => {
   const theme = useTheme();
   const authUser = useSelector((state) => state.authUser.authUser);
@@ -132,12 +133,7 @@ const UserProfile = () => {
   }
 
   if (isError) {
-    content = (
-      <Typography variant="h4" color="error">
-        Error loading user details. Please try again.
-        {console.log(error)}
-      </Typography>
-    );
+    content = <InternalServerError />;
   }
 
   if (isSuccess) {

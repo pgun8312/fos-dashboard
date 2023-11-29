@@ -3,6 +3,7 @@ import {
   Route,
   Routes,
   Navigate,
+  Outlet,
 } from "react-router-dom";
 
 import RootLayout from "./components/layout/RootLayout.jsx";
@@ -12,6 +13,7 @@ import AuthLayout from "./components/layout/AuthLayout.jsx";
 import Login from "./components/Login/Login.jsx";
 import SignUp from "./components/Login/SignUp.jsx";
 import ConfirmSignUp from "./components/Login/ConfirmSignUp.jsx";
+import NotFound from "./pages/NotFound.jsx";
 
 const MainLayout = () => {
   return (
@@ -30,9 +32,11 @@ const MainLayout = () => {
             <Route path="/auth/confirm-signup" element={<ConfirmSignUp />} />
           </Route>
         </Route>
+        <Route path="/admin/*" element={<AdminRoutes />} />
+        <Route path="/home/*" element={<UserRoutes />} />
+        <Route path="/*" element={<NotFound />} />
+        {/* wild card operator */}
       </Routes>
-      <UserRoutes />
-      <AdminRoutes />
     </Router>
   );
 };

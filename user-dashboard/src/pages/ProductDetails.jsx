@@ -25,6 +25,7 @@ import { useGetProductByIdQuery } from "../store/apis/userApi";
 import { HashLoader, MoonLoader } from "react-spinners";
 import CustomMainButton from "../components/CustomMainButton/CustomMainButton";
 import { useTheme } from "@mui/material";
+import InternalServerError from "./InternalServerError";
 
 const ProductDetails = () => {
   const navigate = useNavigate();
@@ -65,7 +66,7 @@ const ProductDetails = () => {
   }
 
   if (isError) {
-    content = <div>Error: {isError.message}</div>;
+    content = <InternalServerError />;
   }
 
   if (isSuccess || selectedProduct) {

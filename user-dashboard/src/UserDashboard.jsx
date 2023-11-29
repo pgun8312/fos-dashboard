@@ -9,6 +9,7 @@ import { HashLoader, MoonLoader } from "react-spinners";
 import { useDispatch } from "react-redux";
 import { setProducts } from "./store/slices/productSlice";
 import { useNavigate } from "react-router-dom";
+import InternalServerError from "./pages/InternalServerError";
 
 const UserDashboard = () => {
   const authUser = useSelector((state) => state.authUser.authUser);
@@ -56,7 +57,7 @@ const UserDashboard = () => {
   }
 
   if (isError) {
-    content = <Box>Error: {error}</Box>;
+    content = <InternalServerError />;
     // Handle the error
   }
 

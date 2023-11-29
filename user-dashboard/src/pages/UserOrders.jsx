@@ -1,4 +1,11 @@
-import { Visibility } from "@mui/icons-material";
+import {
+  Visibility,
+  AutorenewOutlined,
+  CancelOutlined,
+  CheckCircleOutline,
+  HourglassEmptyOutlined,
+  VisibilityOff,
+} from "@mui/icons-material";
 import {
   Box,
   Button,
@@ -14,6 +21,7 @@ import {
   TableHead,
   TableRow,
   Typography,
+  Chip,
 } from "@mui/material";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
@@ -23,6 +31,7 @@ import {
   useGetOrderByIdQuery,
   useGetUserOrderQuery,
 } from "../store/apis/userApi";
+import InternalServerError from "./InternalServerError";
 
 function createData({
   id,
@@ -40,8 +49,12 @@ const UserOrders = () => {
 
   const authUser = useSelector((state) => state.authUser.authUser);
   const { id } = authUser;
-  const { data, isSuccess, isLoading, isError, error } =
-    useGetUserOrderQuery(id);
+  const { data, isSuccess, isLoading, isError, error } = useGetUserOrderQuery(
+    id,
+    {
+      skip: !id,
+    }
+  );
 
   /* FOR HANDLING SELECTED ORDER DETAILS */
   const {
@@ -55,6 +68,7 @@ const UserOrders = () => {
 
   let orderDetailsModalContent;
 
+  //for the both laoding and the fetching
   if (
     isOrderDetailsLoading ||
     (isOrderDetailsSuccess && isOrderDetailsFetching)
@@ -98,6 +112,36 @@ const UserOrders = () => {
     setOpenModal(true);
   };
 
+  const renderStatus = (status) => {
+    switch (status) {
+      case "DELIVERED":
+        return (
+          <Chip
+            icon={<CheckCircleOutline style={{ color: "green" }} />}
+            label="Delivered"
+          />
+        );
+      case "CANCELED":
+        return (
+          <Chip
+            icon={<CancelOutlined style={{ color: "red" }} />}
+            label="Canceled"
+          />
+        );
+      case "PROCESSING":
+        return (
+          <Chip
+            icon={<AutorenewOutlined style={{ color: "blue" }} />}
+            label="Processing"
+          />
+        );
+      default:
+        return (
+          <Chip icon={<HourglassEmptyOutlined style={{ color: "orange" }} />} />
+        );
+    }
+  };
+
   let content;
 
   if (isLoading) {
@@ -117,7 +161,7 @@ const UserOrders = () => {
   }
 
   if (isError) {
-    content = <div>Error: {console.log(error)}</div>;
+    content = <InternalServerError />;
   }
 
   if (isSuccess) {
@@ -132,7 +176,7 @@ const UserOrders = () => {
             <TableRow>
               <TableCell>Order</TableCell>
               <TableCell align="right">Ordered Date</TableCell>
-              <TableCell align="right">Delivered Date</TableCell>
+              <TableCell align="right">Last updated Date</TableCell>
               <TableCell align="right">Fullfillment status</TableCell>
               <TableCell align="right">Information</TableCell>
               <TableCell align="right">Total ($)</TableCell>
@@ -149,7 +193,9 @@ const UserOrders = () => {
                 </TableCell>
                 <TableCell align="right">{row.orderedDate}</TableCell>
                 <TableCell align="right">{row.deliveredDate ?? "-"}</TableCell>
-                <TableCell align="right">{row.orderStatus}</TableCell>
+                <TableCell align="right">
+                  {renderStatus(row.orderStatus)}
+                </TableCell>
                 <TableCell align="right">
                   {
                     <IconButton

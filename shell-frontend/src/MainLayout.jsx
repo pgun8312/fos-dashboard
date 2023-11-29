@@ -14,28 +14,31 @@ import Login from "./components/Login/Login.jsx";
 import SignUp from "./components/Login/SignUp.jsx";
 import ConfirmSignUp from "./components/Login/ConfirmSignUp.jsx";
 import NotFound from "./pages/NotFound.jsx";
+import { StoreProvider } from "./store/store.js";
 
 const MainLayout = () => {
   return (
     <Router>
       <Routes>
-        <Route element={<RootLayout />}>
-          {/* Common Routes */}
-          <Route
-            exact
-            path="/"
-            element={<Navigate to="/auth/signin" replace />}
-          />
-          <Route element={<AuthLayout />}>
-            <Route path="/auth/signup" element={<SignUp />} />
-            <Route path="/auth/signin" element={<Login />} />
-            <Route path="/auth/confirm-signup" element={<ConfirmSignUp />} />
+        <Route element={<StoreProvider />}>
+          <Route element={<RootLayout />}>
+            {/* Common Routes */}
+            <Route
+              exact
+              path="/"
+              element={<Navigate to="/auth/signin" replace />}
+            />
+            <Route element={<AuthLayout />}>
+              <Route path="/auth/signup" element={<SignUp />} />
+              <Route path="/auth/signin" element={<Login />} />
+              <Route path="/auth/confirm-signup" element={<ConfirmSignUp />} />
+            </Route>
           </Route>
+          <Route path="/admin/*" element={<AdminRoutes />} />
+          <Route path="/home/*" element={<UserRoutes />} />
+          <Route path="/*" element={<NotFound />} />
+          {/* wild card operator */}
         </Route>
-        <Route path="/admin/*" element={<AdminRoutes />} />
-        <Route path="/home/*" element={<UserRoutes />} />
-        <Route path="/*" element={<NotFound />} />
-        {/* wild card operator */}
       </Routes>
     </Router>
   );

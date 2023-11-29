@@ -13,9 +13,9 @@ import globalCart, {
   clearCart,
 } from "./slices/cartSlice";
 import { setMode } from "./slices/themeSlice";
-import { useSelector, useDispatch } from "react-redux";
+import { Outlet } from "react-router-dom";
 //redux store
-const store = configureStore({
+export const store = configureStore({
   reducer: {
     theme,
     authUser,
@@ -29,7 +29,12 @@ setupListeners(store.dispatch);
 
 //exposing the store provider
 export const StoreProvider = ({ children }) => {
-  return <Provider store={store}>{children}</Provider>;
+  return (
+    <Provider store={store}>
+      {children}
+      <Outlet />
+    </Provider>
+  );
 };
 
 //passing the states and actions to sub mfes
@@ -51,6 +56,7 @@ export const useGlobalStore = () => {
     decreaseCount,
     setIsCartOpen,
     clearCart,
+    setAuthUser,
     setAuthUser,
     setToken,
     setMode,

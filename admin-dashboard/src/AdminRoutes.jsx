@@ -1,7 +1,8 @@
 import { Route, Routes } from "react-router-dom";
 import AdminOrders from "./pages/AdminOrders.jsx";
 
-import ProtectedRoute from "shell_frontend/ProtectedRoute";
+// import ProtectedRoute from "shell_frontend/ProtectedRoute";
+import ProtectedRoute from "./components/layout/ProtectedRoute";
 import RootLayout from "shell_frontend/RootLayout";
 import DashboardLayout from "shell_frontend/DashboardLayout";
 import AdminProducts from "./pages/AdminProducts.jsx";
@@ -13,12 +14,13 @@ import { AdminDashboardStoreProvider } from "./store/store.js";
 import AdminProductManagement from "./pages/AdminProductManagement.jsx";
 import NotFound from "./pages/NotFound.jsx";
 export const AdminRoutes = () => {
+  /* IN here this is accessing the global store state, but this will override the local store when it wrapped with AdminDashboardStoreProvider*/
   const authUser = useSelector((state) => state.authUser.authUser);
   return (
     <Routes>
-      {console.log(authUser)}
-      <Route element={<RootLayout />}>
-        <Route element={<AdminDashboardStoreProvider />}>
+      {console.log("AdminRoutes", authUser)}
+      <Route element={<AdminDashboardStoreProvider />}>
+        <Route element={<RootLayout />}>
           <Route
             element={
               <DashboardLayout isCartShow={false} navItems={adminNavItems} />

@@ -1,12 +1,10 @@
 import { useSelector } from "react-redux";
 const AdminDashboard = () => {
-  const authUser = useSelector((state) => state);
-  const order = useSelector((state) => state.local.order);
+  const state = useSelector((state) => state);
   return (
     <div>
       AdminDashboard
-      {console.log(authUser)}
-      {console.log(order)}
+      {console.log(state)}
     </div>
   );
 };

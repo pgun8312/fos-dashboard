@@ -25,12 +25,6 @@ import "./index.css";
 // );
 
 import MainLayout from "./MainLayout";
-import { StoreProvider } from "shell_frontend/store";
+import { StoreProvider } from "./store/store";
 const root = createRoot(document.querySelector("#app"));
-root.render(
-  <StoreProvider>
-    {/* NEED TO PROVIDE GLOBAL STORE TO EVERY MFE NOT THE LOCAL IMPORT */}
-    {/* giving access to global store details */}
-    <MainLayout />
-  </StoreProvider>
-);
+root.render(<MainLayout />);

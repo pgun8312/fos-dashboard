@@ -6,8 +6,4 @@ import { StoreProvider } from "shell_frontend/store";
 import { UserDashboardStoreProvider } from "./store/store";
 
 const root = createRoot(document.querySelector("#app"));
-root.render(
-  <UserDashboardStoreProvider>
-    <MainLayout />
-  </UserDashboardStoreProvider>
-);
+root.render(<MainLayout />);

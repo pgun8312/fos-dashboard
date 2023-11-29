@@ -1,11 +1,13 @@
-import { Box, Grid, Tab, Tabs } from "@mui/material";
+import { Box, Grid, Tab, Tabs, Button } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useGetProductsQuery } from "../store/apis/adminApi";
 import { HashLoader } from "react-spinners";
+import { useNavigate } from "react-router-dom";
 import ProductCard from "../components/ProductCard/ProductCard";
 import ice_cream from "../assets/ice_cream.jpg";
 import InternalServerError from "./InternalServerError";
 const AdminProducts = () => {
+  const navigate = useNavigate();
   const {
     data: products,
     isSuccess,
@@ -116,7 +118,18 @@ const AdminProducts = () => {
         height: "100%",
       }}
     >
-      <Box className="subcontainer-breadcrumb"></Box>
+      <Box
+        sx={{
+          margin: "1rem 0 0 1rem",
+        }}
+      >
+        <Button
+          variant="contained"
+          onClick={() => navigate("/admin/addproduct")}
+        >
+          Add Product
+        </Button>
+      </Box>
       {content}
     </Box>
   );

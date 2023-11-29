@@ -70,7 +70,6 @@ const UserProfile = () => {
         phone: phoneNumber,
         email,
       };
-      console.log(requestBody);
       const userAccountUpdateResponse = await updateUserAccount({
         updatedUser: requestBody,
         userId: id,

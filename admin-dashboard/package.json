@@ -36,6 +36,7 @@
     "@mui/icons-material": "^5.14.16",
     "@mui/material": "^5.14.16",
     "@mui/x-data-grid": "^6.18.2",
+    "@nivo/pie": "^0.84.0",
     "@reduxjs/toolkit": "^1.9.7",
     "file-loader": "^6.2.0",
     "formik": "^2.4.5",

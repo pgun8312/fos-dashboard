@@ -1,0 +1,6 @@
+projectKey=fos-user-dashboard
+serverUrl=http://localhost:8090
+serverVersion=9.9.2.77730
+dashboardUrl=http://localhost:8090/dashboard?id=fos-user-dashboard
+ceTaskId=AYwkaA3ihRcVV39Lnnju
+ceTaskUrl=http://localhost:8090/api/ce/task?id=AYwkaA3ihRcVV39Lnnju

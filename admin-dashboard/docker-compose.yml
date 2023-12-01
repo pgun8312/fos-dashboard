@@ -1,0 +1,14 @@
+version: "3.9"
+
+services:
+  sonarqube:
+    container_name: "sonarqube-container"
+    image: "sonarqube:9.9.2-community"
+    volumes:
+      - ./sonarqube/extensions:/opt/sonarqube/extensions
+      - ./sonarqube/logs:/opt/sonarqube/logs
+      - ./sonarqube/data:/opt/sonarqube/data
+    expose:
+      - "8090" #docker running port
+    ports:
+      - "8090:9000" #docker running port map to pc port

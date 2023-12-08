@@ -2,7 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import { Provider } from "react-redux";
 import { setupListeners } from "@reduxjs/toolkit/query";
 import { authApi } from "./apis/authApi";
-import theme from "./slices/themeSlice";
+import theme, { setMode } from "./slices/themeSlice";
 import authUser, { setAuthUser, setToken } from "./slices/authUserSlice";
 import globalCart, {
   addToCart,
@@ -12,7 +12,6 @@ import globalCart, {
   setIsCartOpen,
   clearCart,
 } from "./slices/cartSlice";
-import { setMode } from "./slices/themeSlice";
 import { Outlet } from "react-router-dom";
 //redux store
 export const store = configureStore({
@@ -39,10 +38,6 @@ export const StoreProvider = ({ children }) => {
 
 //passing the states and actions to sub mfes
 export const useGlobalStore = () => {
-  // const globalCart = useSelector((state) => state.globalCart);
-  // const authUser = useSelector((state) => state.authUser);
-  // const theme = useSelector((state) => state.theme);
-
   return {
     /* GLOBAL REDUCERS */
     authUser,
@@ -56,7 +51,6 @@ export const useGlobalStore = () => {
     decreaseCount,
     setIsCartOpen,
     clearCart,
-    setAuthUser,
     setAuthUser,
     setToken,
     setMode,

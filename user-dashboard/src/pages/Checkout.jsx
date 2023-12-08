@@ -352,6 +352,7 @@ const Checkout = () => {
                   }
                 />
                 <Button
+                  data-testid="checkout-place-order-btn"
                   variant="contained"
                   disableElevation
                   fullWidth
@@ -468,7 +469,12 @@ const Checkout = () => {
             }}
           >
             <Typography fontWeight="bold">Sub Total:</Typography>
-            <Typography fontWeight="bold">${totalPrice.toFixed(2)}</Typography>
+            <Typography
+              fontWeight="bold"
+              data-testid="checkout-total-price-lbl"
+            >
+              ${totalPrice.toFixed(2)}
+            </Typography>
           </Box>
         </Box>
       </Box>

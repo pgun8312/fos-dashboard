@@ -4,8 +4,6 @@ import {
   Card,
   CardActions,
   CardContent,
-  CardHeader,
-  Chip,
   CircularProgress,
   Divider,
   Snackbar,
@@ -21,7 +19,6 @@ import {
   useConfirmSignUpMutation,
   useResendConfirmationCodeMutation,
 } from "../../store/apis/authApi";
-import InternalServerError from "../../pages/InternalServerError";
 
 const CustomSecondaryButton = styled("button")(({ theme }) => ({
   border: "none",
@@ -39,8 +36,7 @@ const ConfirmSignUp = () => {
   const [error, setError] = useState("");
   const [isSnackBarOpen, setIsSnackBarOpen] = useState(false);
   const [ConfirmSignUp, { isLoading }] = useConfirmSignUpMutation();
-  const [resendConfirmationCode, { isLoading: isLoading2 }] =
-    useResendConfirmationCodeMutation();
+  const [resendConfirmationCode] = useResendConfirmationCodeMutation();
   const theme = useTheme();
   const navigate = useNavigate();
 
@@ -58,9 +54,7 @@ const ConfirmSignUp = () => {
       setConfirmationCodeCode("");
       setError("");
       setIsSnackBarOpen(true);
-      // navigate("/auth/signin");
     } catch (error) {
-      // console.log(error);
       if (error?.data) {
         // If there is an error response from the server
         setError(error?.data?.error || "ERROR");
@@ -93,7 +87,6 @@ const ConfirmSignUp = () => {
       alert("Code successfully resend");
       setError("");
     } catch (error) {
-      // console.log(error);
       if (error?.data) {
         // If there is an error response from the server
         setError(error?.data?.error || "ERROR");
@@ -205,6 +198,7 @@ const ConfirmSignUp = () => {
           <CustomMainButton
             variant="contained"
             disableElevation
+            data-testid="login-confirm-signup-btn"
             sx={{
               color: theme.palette.secondary.light,
               "&:hover": {

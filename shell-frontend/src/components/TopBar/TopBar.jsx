@@ -5,24 +5,18 @@ import {
   Menu as MenuIcon,
   Search,
   SettingsOutlined,
-  ArrowDropDownCircleOutlined,
   ShoppingCartOutlined,
 } from "@mui/icons-material";
 import {
   AppBar,
-  Button,
   Box,
-  Typography,
   IconButton,
   InputBase,
   Toolbar,
-  Menu,
-  MenuItem,
   useTheme,
   Badge,
 } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-// import { setMode } from "../../store/slices/themeSlice";
 import { setIsCartOpen } from "../../store/slices/cartSlice";
 import { useGlobalStore } from "../../store/store";
 
@@ -52,7 +46,10 @@ const TopBar = ({ isSidebarOpen, setIsSideBarOpen, isCartShow }) => {
             alignItems: "center",
           }}
         >
-          <IconButton onClick={() => setIsSideBarOpen(!isSidebarOpen)}>
+          <IconButton
+            data-testid="menu-icon-button"
+            onClick={() => setIsSideBarOpen(!isSidebarOpen)}
+          >
             <MenuIcon />
           </IconButton>
           <Box
@@ -78,8 +75,8 @@ const TopBar = ({ isSidebarOpen, setIsSideBarOpen, isCartShow }) => {
           <IconButton
             onClick={() => {
               dispatch(setMode());
-              console.log("hi");
             }}
+            data-testid="menu-theme-button"
           >
             {theme.palette.mode === "dark" ? (
               <DarkModeOutlined />
@@ -97,6 +94,7 @@ const TopBar = ({ isSidebarOpen, setIsSideBarOpen, isCartShow }) => {
                 onClick={() => {
                   dispatch(setIsCartOpen());
                 }}
+                data-testid="menu-cart-button"
               >
                 <ShoppingCartOutlined />
               </IconButton>

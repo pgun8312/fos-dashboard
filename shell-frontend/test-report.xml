@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testExecutions version="1">
+  <file path="C:\Users\Pasindu Gunawardana\Desktop\FOS\fos-dashboard\shell-frontend\src\__tests__\App.test.jsx">
+  </file>
+  <file path="C:\Users\Pasindu Gunawardana\Desktop\FOS\fos-dashboard\shell-frontend\src\__tests__\empty-module.test.js">
+    <testCase name="Empty Module should export an empty object" duration="13"/>
+  </file>
+  <file path="C:\Users\Pasindu Gunawardana\Desktop\FOS\fos-dashboard\shell-frontend\src\components\Cart\__tests__\Cart.test.jsx">
+    <testCase name="Cart Component Tests renders Cart component correctly" duration="278"/>
+    <testCase name="Cart Component Tests closes the cart when close button is clicked" duration="53"/>
+  </file>
+  <file path="C:\Users\Pasindu Gunawardana\Desktop\FOS\fos-dashboard\shell-frontend\src\components\SideBar\__tests__\SideBar.test.jsx">
+    <testCase name="SideBar Component Tests renders SideBar component correctly" duration="275"/>
+  </file>
+  <file path="C:\Users\Pasindu Gunawardana\Desktop\FOS\fos-dashboard\shell-frontend\src\components\TopBar\__tests__\TopBar.test.jsx">
+    <testCase name="TopBar Component Test renders redux store provider correctly" duration="138"/>
+    <testCase name="TopBar Component Test toggles the sidebar when button clicked" duration="33"/>
+    <testCase name="TopBar Component Test Search input working!" duration="23"/>
+  </file>
+</testExecutions>

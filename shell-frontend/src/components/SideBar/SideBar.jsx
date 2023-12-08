@@ -16,7 +16,7 @@ import {
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { setAuthUser, setToken } from "../../store/slices/authUserSlice";
 
 const SideBar = ({
@@ -30,7 +30,6 @@ const SideBar = ({
   const { pathname } = useLocation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const authUser = useSelector((state) => state);
   useEffect(() => {
     console.log(pathname);
     setActiveTab(pathname);
@@ -96,7 +95,7 @@ const SideBar = ({
             </Box>
           </Box>
           <List>
-            {navItems.map(({ text, icon, path }) => {
+            {navItems.map(({ text, icon, path }, id) => {
               /* section names */
               if (!icon) {
                 return (
@@ -126,6 +125,7 @@ const SideBar = ({
                   }}
                 >
                   <ListItemButton
+                    data-testid={`sidebar-nav-${id}`}
                     onClick={() => {
                       navigate(path);
                       setActiveTab(path);

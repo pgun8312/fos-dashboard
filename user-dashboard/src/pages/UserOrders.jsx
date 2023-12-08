@@ -200,6 +200,7 @@ const UserOrders = () => {
                   {
                     <IconButton
                       onClick={() => handleSelectedOrderDetails(row.id)}
+                      data-testid={`my-orders-view-order-${row.id}`}
                     >
                       <Visibility />
                     </IconButton>

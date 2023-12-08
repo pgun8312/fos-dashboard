@@ -1,0 +1,14 @@
+version: "3"
+services:
+  # shell-frontend:
+  #   build: ./shell-frontend
+  #   ports:
+  #     - "3000:3000"
+  admin-dashboard:
+    build: ./admin-dashboard
+    ports:
+      - "3001:3001"
+  user-dashboard:
+    build: ./user-dashboard
+    ports:
+      - "3002:3002"

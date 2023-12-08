@@ -4,8 +4,6 @@ import {
   Card,
   CardActions,
   CardContent,
-  CardHeader,
-  Chip,
   CircularProgress,
   Divider,
   IconButton,
@@ -70,7 +68,6 @@ const SignUp = () => {
       setPassword("");
       setPhoneNumber("");
       setError("");
-      // navigate("/auth/confirm-signup");
     } catch (error) {
       if (error?.data) {
         // If there is an error response from the server
@@ -249,6 +246,7 @@ const SignUp = () => {
                 <CircularProgress size={20} color="inherit" />
               ) : undefined
             }
+            data-testid="signup-btn"
           >
             SignUp
           </CustomMainButton>
@@ -277,6 +275,7 @@ const SignUp = () => {
                 color: theme.palette.primary.main,
               }}
               onClick={() => navigate("/auth/confirm-signup")}
+              data-testid="login-goto-confirm-signup-btn"
             >
               Confirm Account
             </CustomSecondaryButton>

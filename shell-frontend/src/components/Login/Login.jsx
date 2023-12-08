@@ -3,7 +3,6 @@ import {
   Card,
   CardActions,
   CardContent,
-  CardHeader,
   Chip,
   CircularProgress,
   Divider,
@@ -17,7 +16,7 @@ import CustomMainButton from "./CustomMainButton";
 import styled from "@emotion/styled";
 import { useTheme } from "@emotion/react";
 import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useSignInMutation } from "../../store/apis/authApi";
 import { setAuthUser, setToken } from "../../store/slices/authUserSlice";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
@@ -51,9 +50,8 @@ const Login = () => {
       if (response?.error) {
         throw response.error;
       }
-      // console.log(response);
 
-      const { idToken, accessToken, expiresIn, user } = response.data;
+      const { accessToken, user } = response.data;
 
       //setting the authenticated user Details and the token
       dispatch(
@@ -96,7 +94,6 @@ const Login = () => {
       setError("");
       navigate(user.role === "Admin" ? "/admin" : "/home");
     } catch (error) {
-      // console.log(error);
       if (error?.data) {
         // If there is an error response from the server
         setError(error?.data?.error || "ERROR");
@@ -208,6 +205,7 @@ const Login = () => {
           }}
         >
           <CustomMainButton
+            data-testid="shell-frontend-login-btn"
             variant="contained"
             disableElevation
             sx={{
@@ -255,6 +253,7 @@ const Login = () => {
                 color: theme.palette.primary.main,
               }}
               onClick={() => navigate("/auth/signup")}
+              data-testid="login-signup-btn"
             >
               Sign Up
             </CustomSecondaryButton>

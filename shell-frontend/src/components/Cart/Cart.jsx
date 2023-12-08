@@ -1,16 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  Box,
-  Button,
-  Divider,
-  Drawer,
-  IconButton,
-  Typography,
-  useMediaQuery,
-} from "@mui/material";
-import { useTheme } from "@emotion/react";
-import styled from "@emotion/styled";
+import { Box, Button, Drawer, IconButton, Typography } from "@mui/material";
 import { Add, CloseOutlined, Remove } from "@mui/icons-material";
 import {
   decreaseCount,
@@ -67,7 +57,10 @@ const Cart = ({ isMobile }) => {
           }}
         >
           <Typography variant="h6">SHOPPING CART ({cart.length})</Typography>
-          <IconButton onClick={() => dispatch(setIsCartOpen())}>
+          <IconButton
+            onClick={() => dispatch(setIsCartOpen())}
+            data-testid="cart-close-button"
+          >
             <CloseOutlined />
           </IconButton>
         </Box>
@@ -181,11 +174,12 @@ const Cart = ({ isMobile }) => {
             }}
           >
             <Button
+              data-testid={`shell-frontend-cart-checkout-btn`}
               onClick={() => {
                 navigate(
                   authUser.role !== "Guest" ? "/home/checkout" : "/auth/signup"
                 );
-                () => dispatch(setIsCartOpen());
+                dispatch(setIsCartOpen());
               }}
               sx={{
                 width: "80%",

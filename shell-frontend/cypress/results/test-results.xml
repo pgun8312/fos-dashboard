@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="88.257" tests="4" failures="0">
+  <testsuite name="Root Suite" timestamp="2023-12-04T18:07:20" tests="0" file="cypress\e2e\shell_frontend_e2e.cy.js" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="FOS dahsboard end to end testing" timestamp="2023-12-04T18:07:20" tests="4" time="88.245" failures="0">
+    <testcase name="FOS dahsboard end to end testing Should create a user" time="15.080" classname="Should create a user">
+    </testcase>
+    <testcase name="FOS dahsboard end to end testing Should login and change the color mode" time="11.095" classname="Should login and change the color mode">
+    </testcase>
+    <testcase name="FOS dahsboard end to end testing should add items to the cart and place an order" time="22.180" classname="should add items to the cart and place an order">
+    </testcase>
+    <testcase name="FOS dahsboard end to end testing Should login and view the orders" time="34.754" classname="Should login and view the orders">
+    </testcase>
+  </testsuite>
+</testsuites>

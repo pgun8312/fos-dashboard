@@ -62,7 +62,10 @@ const ProductCard = ({ product }) => {
           alignItems: "center",
         }}
       >
-        <IconButton onClick={() => setOpenExtra(true)}>
+        <IconButton
+          onClick={() => setOpenExtra(true)}
+          data-testid={`shell-frontend-productcard-extra-btn-open-${product.id}`}
+        >
           <MenuIcon />
         </IconButton>
       </Box>
@@ -84,7 +87,10 @@ const ProductCard = ({ product }) => {
             alignItems: "center",
           }}
         >
-          <IconButton onClick={() => setOpenExtra(false)}>
+          <IconButton
+            onClick={() => setOpenExtra(false)}
+            data-testid={`shell-frontend-productcard-extra-btn-close-${product.id}`}
+          >
             <MenuIcon />
           </IconButton>
         </Box>
@@ -105,6 +111,7 @@ const ProductCard = ({ product }) => {
           >
             <IconButton
               onClick={() => dispatch(decreaseCount({ id: product.id }))}
+              data-testid={`shell-frontend-productcard-decrese-cart-btn-${product.id}`}
             >
               <Remove />
             </IconButton>
@@ -114,6 +121,7 @@ const ProductCard = ({ product }) => {
             </Typography>
             <IconButton
               onClick={() => dispatch(increaseCount({ id: product.id }))}
+              data-testid={`shell-frontend-productcard-increase-cart-btn-${product.id}`}
             >
               <Add />
             </IconButton>
@@ -121,6 +129,7 @@ const ProductCard = ({ product }) => {
           <IconButton
             onClick={() => dispatch(addToCart({ item: product }))}
             color="primary"
+            data-testid={`shell-frontend-productcard-addto-cart-btn-${product.id}`}
           >
             <AddShoppingCartOutlined />
           </IconButton>
@@ -128,6 +137,7 @@ const ProductCard = ({ product }) => {
           <IconButton
             onClick={() => dispatch(removeFromCart({ id: product.id }))}
             color="error"
+            data-testid={`shell-frontend-productcard-removefrom-cart-btn-${product.id}`}
           >
             <RemoveShoppingCartOutlined />
           </IconButton>

@@ -1,6 +1,0 @@
-projectKey=fos-shell-frontend
-serverUrl=http://localhost:8090
-serverVersion=9.9.2.77730
-dashboardUrl=http://localhost:8090/dashboard?id=fos-shell-frontend
-ceTaskId=AYwkY79ghRcVV39Lnnjk
-ceTaskUrl=http://localhost:8090/api/ce/task?id=AYwkY79ghRcVV39Lnnjk

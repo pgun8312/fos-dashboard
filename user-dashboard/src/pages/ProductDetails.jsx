@@ -35,10 +35,6 @@ const ProductDetails = () => {
     useGlobalStore();
   const { id } = useParams();
   const theme = useTheme();
-  //   const selectedProduct = useSelector((state) => state.local.products.products);
-  const selectedProduct = useSelector((state) =>
-    state.local.products.products.find((product) => product.id === id)
-  );
 
   const {
     data: fetchedProduct,
@@ -69,8 +65,8 @@ const ProductDetails = () => {
     content = <InternalServerError />;
   }
 
-  if (isSuccess || selectedProduct) {
-    const product = isSuccess ? fetchedProduct : selectedProduct;
+  if (isSuccess) {
+    const product = fetchedProduct;
 
     content = (
       <>
@@ -186,14 +182,11 @@ const ProductDetails = () => {
               </CustomMainButton>
 
               <CustomMainButton
-                onClick={() => dispatch(addToCart({ item: product }))}
+                onClick={() => dispatch(removeFromCart({ id: product.id }))}
                 color="primary"
               >
                 Remove From Cart
-                <IconButton
-                  onClick={() => dispatch(removeFromCart({ id: product.id }))}
-                  color="error"
-                >
+                <IconButton>
                   <RemoveShoppingCartOutlined />
                 </IconButton>
               </CustomMainButton>
@@ -213,22 +206,7 @@ const ProductDetails = () => {
     );
   }
 
-  return (
-    <Box sx={{ margin: "1rem 0 0 1rem" }}>
-      {content}
-      {console.log(
-        "ID: ",
-        id,
-        "selectedProduct: ",
-        selectedProduct,
-        "fetchedProduct: ",
-        fetchedProduct,
-        isLoading,
-        isError,
-        isSuccess
-      )}
-    </Box>
-  );
+  return <Box sx={{ margin: "1rem 0 0 1rem" }}>{content}</Box>;
 };
 
 export default ProductDetails;

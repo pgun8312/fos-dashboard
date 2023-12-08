@@ -1,14 +1,33 @@
 version: "3"
 services:
+  # SonarQube service
+  sonarqube:
+    image: sonarqube:lts-community
+    ports:
+      - "8090:9000"
   # shell-frontend:
   #   build: ./shell-frontend
   #   ports:
   #     - "3000:3000"
+
+  # Admin Dashboard service
   admin-dashboard:
     build: ./admin-dashboard
     ports:
       - "3001:3001"
+    # Ensure the SonarQube service is started before this service
+    depends_on:
+      - sonarqube
+    # Specify the command to run when the service starts
+    # command: sh -c "yarn start:live && yarn sonar-scanner"
+
+  # User Dashboard service
   user-dashboard:
     build: ./user-dashboard
     ports:
       - "3002:3002"
+    # Ensure the SonarQube service is started before this service
+    depends_on:
+      - sonarqube
+    # Specify the command to run when the service starts
+    # command: sh -c "yarn start:live && yarn sonar-scanner"

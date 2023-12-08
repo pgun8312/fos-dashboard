@@ -7,10 +7,11 @@ module.exports = defineConfig({
       // implement node event listeners here
     },
   },
-  // Use the Cypress built-in junit reporter
-  reporter: "junit",
+  // Use external cypress reporter wich support by sonarqube
+  reporter: "cypress-sonarqube-reporter",
   reporterOptions: {
-    // specify the output directory
-    mochaFile: path.resolve(__dirname, "cypress/results/test-results.xml"),
+    // specify the output directory for the Cypress SonarQube Reporter
+    outputDir: path.resolve(__dirname, "cypress/results"),
+    overwrite: true,
   },
 });

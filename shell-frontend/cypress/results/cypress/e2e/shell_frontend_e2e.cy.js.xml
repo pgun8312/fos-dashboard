@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<testExecutions version="1">
+  <file path="cypress/e2e/shell_frontend_e2e.cy.js">
+    <testCase name="FOS dahsboard end to end testing - Should create a user" duration="13133"/>
+    <testCase name="FOS dahsboard end to end testing - Should login and change the color mode" duration="9667"/>
+    <testCase name="FOS dahsboard end to end testing - should add items to the cart and place an order" duration="21135"/>
+    <testCase name="FOS dahsboard end to end testing - Should login and view the orders" duration="34897"/>
+  </file>
+</testExecutions>

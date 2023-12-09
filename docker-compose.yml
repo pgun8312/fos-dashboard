@@ -5,10 +5,21 @@ services:
     image: sonarqube:lts-community
     ports:
       - "8090:9000"
-  # shell-frontend:
-  #   build: ./shell-frontend
-  #   ports:
-  #     - "3000:3000"
+
+  #shell-frontend service
+  shell-frontend:
+    build: ./shell-frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - sonarqube
+    env_file:
+      - .env
+      # don't need environemnt varible define here if have a .env file
+    # environment:
+    #   - SONAR_HOST_URL=http://your-dynamic-hostname:8090
+    # Specify the command to run when the service starts
+    # command: sh -c "yarn start:live && yarn sonar-scanner"
 
   # Admin Dashboard service
   admin-dashboard:
@@ -18,6 +29,8 @@ services:
     # Ensure the SonarQube service is started before this service
     depends_on:
       - sonarqube
+    env_file:
+      - .env # passing .env file
     # Specify the command to run when the service starts
     # command: sh -c "yarn start:live && yarn sonar-scanner"
 
@@ -29,5 +42,9 @@ services:
     # Ensure the SonarQube service is started before this service
     depends_on:
       - sonarqube
+    env_file:
+      - .env
+    # environment:
+    #   - SONAR_HOST_URL=http://10.97.31.71:8090
     # Specify the command to run when the service starts
     # command: sh -c "yarn start:live && yarn sonar-scanner"

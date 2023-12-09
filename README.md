@@ -11,6 +11,30 @@ This project is a REACT Dashbaord for Food Ordering System application consistin
 - [Node.js](https://nodejs.org/) installed
 - [Docker](https://www.docker.com/) installed
 
+### Include your machine ipv4 address in the .env file to run sonar analysis
+
+1. create .env file and add environment variables
+   SONAR_HOST_URL=http://your-dynamic-hostname:8090 (port address of sonarqube server/ define in docker-compose file)
+
+   verify the env set up in the environment
+   docker exec -it <container_id> sh
+   echo $SONAR_HOST_URL || env
+
+2. to see the ipv4 address
+   cmd -> ipconfig
+
+   \*\*result:
+
+   Ethernet adapter Ethernet 2:
+
+   Connection-specific DNS Suffix . : na.sysco.net
+   IPv4 Address. . . . . . . . . . . : 10.97.31.71
+   Subnet Mask . . . . . . . . . . . : 255.255.224.0
+
+   \*\*use ipv4 address
+
+3. start the sonar qube server and update the login and password in .env file
+
 ### Installation Steps
 
 1. Clone the repository
@@ -70,7 +94,7 @@ yarn <your-command>
 Replace <your-command> with the specific command you want to run.
 
 Example:
-yarn sonar-scanner
+yarn sonar-scanner OR sonar-scanner
 
 ### Extra DOCKER commands
 
@@ -90,3 +114,11 @@ docker-compose down
 # Recreate containers and rebuild images
 
 docker-compose up --build
+
+# Restart Docker Compose:
+
+If your Docker Compose setup is already running, restart it to apply the changes:
+docker-compose down
+docker-compose up -d
+
+This will stop the running containers and start them again with the updated environment variables.

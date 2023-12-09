@@ -7,26 +7,21 @@ WORKDIR /app
 # Copy package.json and yarn.lock to the working directory
 COPY package.json yarn.lock ./
 
-# Disable SSL verification for yarn
-RUN yarn config set strict-ssl false
+# Install the project dependencies and OpenJDK 17(for run the sonar-scanner)
+RUN apk add --no-cache openjdk17 --repository=http://dl-cdn.alpinelinux.org/alpine/edge/community \
+    && npm install --production --ignore-optional
 
-# Update npm
-RUN npm config set registry https://registry.npmjs.org/ \
-    && npm install -g npm@latest
+# Install Sonar Scanner
+RUN wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.4.0.2170.zip && \
+    unzip sonar-scanner-cli-4.4.0.2170.zip && \
+    mv sonar-scanner-4.4.0.2170 /opt/sonar-scanner && \
+    rm sonar-scanner-cli-4.4.0.2170.zip
 
-# Install the project dependencies
-RUN npm install --ignore-optional
-
-# Set up SSL certificates for Cypress
-RUN apk add --no-cache openssl \
-    && openssl s_client -showcerts -connect download.cypress.io:443 </dev/null 2>/dev/null|openssl x509 -outform PEM > /usr/local/share/ca-certificates/cypress.crt \
-    && update-ca-certificates
+# Add Sonar Scanner to the PATH
+ENV PATH="/opt/sonar-scanner/bin:${PATH}"
 
 # Copy the local code to the container
 COPY . .
-
-# Install Cypress separately to avoid SSL issues
-RUN yarn add cypress --ignore-optional
 
 # Build the React app
 RUN yarn build
@@ -34,5 +29,5 @@ RUN yarn build
 # Expose the port that the app will run on
 EXPOSE 3000
 
-# Define the command to run the application
-CMD ["yarn", "start:live"]
+# Explicitly set the PATH and define the command to run the application
+CMD ["sh", "-c", "export PATH=/opt/sonar-scanner/bin:${PATH} && yarn start:live"]

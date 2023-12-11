@@ -45,15 +45,26 @@ This project is a REACT Dashbaord for Food Ordering System application consistin
 
    ```
 
+   Environment Variables
+
+Create a .env file in the root of the project with the necessary environment variables. Sample content:
+
+```
+# SONAR_HOST_URL=http://your-dynamic-hostname:8090, host with frontend
+SONAR_HOST_URL=${HOST_URL}:8090
+SONAR_LOGIN=your-sonar-login-user-name
+SONAR_PASSWORD=your-sonar-password
+```
+
 2. Install dependencies
-   yarn install
+   ` yarn install`
 
 3. Install micro-frontends
-   yarn pkg:install
+   `yarn pkg:install`
 
 ## Start the Development Server
 
-    yarn dev
+` yarn dev`
 
     This command will concurrently start the development servers for admin-dashboard, user-dashboard, and shell-frontend.
     Admin Dashboard: http://localhost:3001
@@ -63,7 +74,7 @@ This project is a REACT Dashbaord for Food Ordering System application consistin
 ## Docker Compose
 
     To run the micro-frontends using Docker Compose, use the following command:
-    docker-compose up
+    `docker-compose up`
 
     This will build and start containers for each micro-frontend, making them accessible at the following ports:
     Admin Dashboard: http://localhost:3001
@@ -76,12 +87,13 @@ If you need to run specific commands defined in your package.json inside a Docke
 
 # Find the Container ID:
 
-docker ps
+`docker ps`
 
 Look for the container ID associated with the micro-frontend you want to run commands for.
 
 # Enter the Container:
 
+```
 docker exec -it <container-id> sh
 
 Replace <container-id> with the actual container ID.
@@ -122,3 +134,4 @@ docker-compose down
 docker-compose up -d
 
 This will stop the running containers and start them again with the updated environment variables.
+```
